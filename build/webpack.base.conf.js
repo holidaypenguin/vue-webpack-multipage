@@ -3,6 +3,8 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+//引入多页面支持
+const multipageHelper = require('./multipage-helper')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -12,9 +14,10 @@ function resolve (dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: {
-    app: './src/main.js'
-  },
+  // entry: {
+  //   app: './src/main.js'
+  // },
+  entry: multipageHelper.getEntries(), //设置入口集合
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
