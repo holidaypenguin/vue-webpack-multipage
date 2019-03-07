@@ -5,11 +5,8 @@ import config from '../../../../config'
 import setting from '../setting'
 
 Vue.use(Router)
-const projectRoot = process.cwd();
-console.log(projectRoot, config.moduleRootPath, process)
-console.log(process.env);
 
-console.log(typeof RUN_ENV);
+console.log(process.env.RUN_ENV);
 
 export default new Router({
   mode: 'history',

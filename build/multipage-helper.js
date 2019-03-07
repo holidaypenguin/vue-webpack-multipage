@@ -16,8 +16,6 @@ const config = require('../config')
 let moduleList          //缓存多页面模块列表
 const moduleRootPath = config.moduleRootPath //模块根目录(这个可以根据自己的需求命名)
 
-console.log(process.argv);
-
 /**
  * 获取js入口数组
  */
