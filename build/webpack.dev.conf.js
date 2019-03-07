@@ -9,6 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+//引入多页面支持
+const multipageHelper = require('./multipage-helper')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -25,7 +27,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
+        {
+          from: match(),
+          to: function(content) {
+            // match();
+            const from = content.match[0];
+            const to = from.replace(/^\/(pos)(.*)/, `/$1${config.produceNameSuffix}$2.html`)
+            console.log("From:", from)
+            console.log("  To:", to)
+            return path.posix.join(config.dev.assetsPublicPath, to);
+          }
+        },
+        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, `${config.produceName}${config.produceNameSuffix}/${config.moduleRootName}/index.html`) },
       ],
     },
     hot: true,
@@ -52,11 +65,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: 'index.html',
+    //   inject: true
+    // }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
@@ -67,6 +80,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
+
+function match(){
+  const modules = multipageHelper.getModuleList().map(item => item.moduleID).join('|');
+
+  // from: /^\/pos\/module\/(index|about)/,
+  return new RegExp("^\/pos\/module\/("+modules+")");
+}
+
+//添加Html模板集合
+Array.prototype.push.apply(devWebpackConfig.plugins,multipageHelper.getDevHtmlWebpackPluginList())
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port

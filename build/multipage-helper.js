@@ -7,12 +7,16 @@
  * @version V1.0
  */
 
-var path = require('path')
-var fs = require("fs")
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const fs = require("fs")
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const utils = require('./utils')
+const config = require('../config')
 
-var moduleList          //缓存多页面模块列表
-var moduleRootPath = './src/module' //模块根目录(这个可以根据自己的需求命名)
+let moduleList          //缓存多页面模块列表
+const moduleRootPath = config.moduleRootPath //模块根目录(这个可以根据自己的需求命名)
+
+console.log(process.argv);
 
 /**
  * 获取js入口数组
@@ -71,10 +75,11 @@ exports.getDevHtmlWebpackPluginList = function getDevHtmlWebpackPluginList(){
   moduleList.forEach(function (mod) {
     //生成配置
     var conf = {
-      filename: mod.moduleID+".html",
+      filename: utils.assetsPath(config.moduleRootName+"/"+mod.moduleID+".html"),
       template: mod.moduleHTML,
       chunks: [mod.moduleID],
-      inject: true
+      inject: true,
+      hash: true,
     }
     console.log("【CONF】",JSON.stringify(conf))
     //添加HtmlWebpackPlugin对象
@@ -99,7 +104,7 @@ exports.getProdHtmlWebpackPluginList = function getProdHtmlWebpackPluginList(){
   moduleList.forEach(function (mod) {
     //生成配置
     var conf = {
-      filename: "module/"+mod.moduleID+".html",
+      filename: utils.assetsPath(config.moduleRootName + "/"+mod.moduleID+".html"),
       template: mod.moduleHTML,
       inject: true,
       minify: {

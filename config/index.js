@@ -3,12 +3,18 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const produceName = 'pos';
+const produceNameSuffix = '_static';
 
 module.exports = {
+  produceName: produceName,
+  produceNameSuffix: produceNameSuffix,
+  moduleRootPath: './src/module', //模块根目录(这个可以根据自己的需求命名)
+  moduleRootName: 'module',
   dev: {
 
     // Paths
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: `${produceName}${produceNameSuffix}`,
     assetsPublicPath: '/',
     proxyTable: {},
 
@@ -20,7 +26,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */
@@ -38,11 +44,11 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../output/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    assetsRoot: path.resolve(__dirname, '../output'),
+    assetsSubDirectory: `${produceName}${produceNameSuffix}`,
     assetsPublicPath: '/',
 
     /**
