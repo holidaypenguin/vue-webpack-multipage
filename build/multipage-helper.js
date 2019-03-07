@@ -48,6 +48,7 @@ exports.getModuleList = function getModuleList() {
   }else {//为空则读取列表
     moduleList = new Array();
     readDirSync(moduleRootPath, "")
+    moduleListFilter();
 
     console.log("\n**********************************************************************************")
     console.log("*********************************** moduleList ***********************************")
@@ -160,4 +161,33 @@ function readDirSync(path,moduleName){
   if ((module.moduleID != "" && module.moduleHTML != "") || (module.moduleID != "" && module.moduleJS != "")){
     moduleList.push(module)
   }
+}
+
+/**
+ * 根据指定编译模块过滤，如果无匹配项则全部编译
+ * @author songshipeng
+ * @date 2019-03-07
+ */
+function moduleListFilter(){
+  const currentModule = getCurrentModule();
+
+  if(!moduleList
+    || module.length < 2
+    || !currentModule
+    || currentModule.length < 1)
+    return moduleList;
+
+  let temp = moduleList.filter(
+    module => currentModule.indexOf(module.moduleID) >= 0
+  );
+
+  moduleList = !temp || temp.length < 1
+    ? moduleList
+    : temp;
+}
+
+
+function getCurrentModule(){
+  console.log(process.argv)
+  return process.argv.splice(2)
 }
