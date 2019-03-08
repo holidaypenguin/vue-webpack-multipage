@@ -5,17 +5,30 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+# 本地启动并打开第一个模块
+npm run local
 
-# build for production with minification
-npm run build
+# 本地启动并打开第一个模块，可指定模块进行开发
+npm run local index about
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# 测试环境编译
+npm run qa
+
+# 测试环境编译，可指定模块进行开发
+npm run qa index about
+
+# 预发布环境编译
+npm run preview
+
+# 预发布环境编译，可指定模块进行开发
+npm run preview index about
+
+# 线上环境编译
+npm run online
+
+# 线上环境编译，可指定模块进行开发
+npm run online index about
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

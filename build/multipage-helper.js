@@ -13,6 +13,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const utils = require('./utils')
 const config = require('../config')
 
+let DEBUG = true;
+
 let moduleList          //缓存多页面模块列表
 const moduleRootPath = config.moduleRootPath //模块根目录(这个可以根据自己的需求命名)
 
@@ -30,10 +32,10 @@ exports.getEntries = function getEntries(){
       entries[module.moduleID] = module.moduleJS
     }
   })
-  console.log("\n*******************************************************************************")
-  console.log("*********************************** entries ***********************************")
-  console.log("*******************************************************************************")
-  console.log(Object.keys(entries).map(item => "【ENTRY】 " + item).join('\n'))
+  DEBUG && console.log("\n*******************************************************************************")
+  DEBUG && console.log("*********************************** entries ***********************************")
+  DEBUG && console.log("*******************************************************************************")
+  DEBUG && console.log(Object.keys(entries).map(item => "【ENTRY】 " + item).join('\n'))
   return entries
 }
 
@@ -50,10 +52,10 @@ exports.getModuleList = function getModuleList() {
     readDirSync(moduleRootPath, "")
     moduleListFilter();
 
-    console.log("\n**********************************************************************************")
-    console.log("*********************************** moduleList ***********************************")
-    console.log("**********************************************************************************")
-    console.log(moduleList.map(item => "【MODULE】 " + JSON.stringify(item)).join('\n'))
+    DEBUG && console.log("\n**********************************************************************************")
+    DEBUG && console.log("*********************************** moduleList ***********************************")
+    DEBUG && console.log("**********************************************************************************")
+    DEBUG && console.log(moduleList.map(item => "【MODULE】 " + JSON.stringify(item)).join('\n'))
     return moduleList
   }
 }
@@ -63,9 +65,9 @@ exports.getModuleList = function getModuleList() {
  * @returns {dev的Html模板集合}
  */
 exports.getDevHtmlWebpackPluginList = function getDevHtmlWebpackPluginList(){
-  console.log("\n************************************************************************************************")
-  console.log("*********************************** devHtmlWebpackPluginList ***********************************")
-  console.log("************************************************************************************************")
+  DEBUG && console.log("\n************************************************************************************************")
+  DEBUG && console.log("*********************************** devHtmlWebpackPluginList ***********************************")
+  DEBUG && console.log("************************************************************************************************")
   //缓存dev的Html模板集合
   var devHtmlWebpackPluginList = []
   //获取多页面模块集合
@@ -80,7 +82,7 @@ exports.getDevHtmlWebpackPluginList = function getDevHtmlWebpackPluginList(){
       inject: true,
       hash: true,
     }
-    console.log("【CONF】",JSON.stringify(conf))
+    DEBUG && console.log("【CONF】",JSON.stringify(conf))
     //添加HtmlWebpackPlugin对象
     devHtmlWebpackPluginList.push(new HtmlWebpackPlugin(conf))
   })
@@ -92,9 +94,9 @@ exports.getDevHtmlWebpackPluginList = function getDevHtmlWebpackPluginList(){
  * @returns {prod的Html模板集合}
  */
 exports.getProdHtmlWebpackPluginList = function getProdHtmlWebpackPluginList(){
-  console.log("\n*************************************************************************************************")
-  console.log("*********************************** prodHtmlWebpackPluginList ***********************************")
-  console.log("*************************************************************************************************")
+  DEBUG && console.log("\n*************************************************************************************************")
+  DEBUG && console.log("*********************************** prodHtmlWebpackPluginList ***********************************")
+  DEBUG && console.log("*************************************************************************************************")
   //缓存dev的Html模板集合
   var prodHtmlWebpackPluginList = []
   //获取多页面模块集合
@@ -117,7 +119,7 @@ exports.getProdHtmlWebpackPluginList = function getProdHtmlWebpackPluginList(){
       chunksSortMode: 'dependency',
       chunks: ['manifest','vendor',mod.moduleID]
     }
-    console.log("【CONF】",JSON.stringify(conf))
+    DEBUG && console.log("【CONF】",JSON.stringify(conf))
     //添加HtmlWebpackPlugin对象
     prodHtmlWebpackPluginList.push(new HtmlWebpackPlugin(conf))
   })
@@ -188,6 +190,6 @@ function moduleListFilter(){
 
 
 function getCurrentModule(){
-  console.log(process.argv)
+  DEBUG && console.log(process.argv)
   return process.argv.splice(2)
 }
