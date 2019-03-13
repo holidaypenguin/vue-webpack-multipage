@@ -7,16 +7,13 @@ const vueLoaderConfig = require('./vue-loader.conf')
 const multipageHelper = require('./multipage-helper')
 
 function resolve (dir) {
-  return path.join(__dirname, '..', dir)
+  return path.join(__dirname, '..',  dir)
 }
 
 
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  // entry: {
-  //   app: './src/main.js'
-  // },
   entry: multipageHelper.getEntries(), //设置入口集合
   output: {
     path: config.build.assetsRoot,

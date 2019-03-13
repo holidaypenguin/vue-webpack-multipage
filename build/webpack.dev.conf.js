@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const { VueLoaderPlugin } = require('vue-loader');
 //引入多页面支持
 const multipageHelper = require('./multipage-helper')
 
@@ -16,6 +17,7 @@ const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
+  mode: 'development',
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
   },
@@ -58,6 +60,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    // make sure to include the plugin for the magic
+    new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       'process.env': Object.assign({}, require('../config/dev.env'), {
         RUN_ENV: `"${process.env.RUN_ENV}"`
