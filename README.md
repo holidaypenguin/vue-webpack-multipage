@@ -57,3 +57,9 @@ location @rewrites {
       rewrite ^/(pos)\/module\/(index|about)/ /$1_static/module/$2.html break;
 }
 ```
+
+## 缺陷
+无esline
+无测试用例
+entry编译后为序号不是模块名字
+vendor没有注入

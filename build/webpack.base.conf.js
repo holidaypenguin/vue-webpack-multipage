@@ -14,6 +14,7 @@ function resolve (dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
+  // TODO 文件名字是序号，查找是否有解决方案
   entry: multipageHelper.getEntries(), //设置入口集合
   output: {
     path: config.build.assetsRoot,

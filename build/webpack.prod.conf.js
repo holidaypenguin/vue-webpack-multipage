@@ -33,6 +33,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   optimization: {
     minimize: true,
+    // TODO vendor暂时有问题
     // splitChunks: {
     //   chunks: 'all',
     //   minSize: 1,
