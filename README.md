@@ -58,6 +58,19 @@ location @rewrites {
 }
 ```
 
+## px2rem
+具体文档查看[px2rem](https://github.com/ZiQiangWang/px2rem)
+```
+{
+  baseDpr: 2,             // base device pixel ratio (default: 2)
+  remUnit: 75,            // rem unit value (default: 75)
+  remPrecision: 6,        // rem value precision (default: 6)
+  keepFontSize: true,     // no transform value of font-size
+  forcePxComment: 'px',   // force px comment (default: `px`)
+  keepComment: 'no'       // no transform value comment (default: `no`)
+}
+```
+
 ## 缺陷
 无esline
 无测试用例
