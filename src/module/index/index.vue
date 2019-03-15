@@ -131,7 +131,15 @@ export default {
 </script>
 
 <style>
-  #app {
+  @n app{
+
+    @b aaaa{
+      height: 100px;
+
+      @e fff{
+        overflow: hidden;
+      }
+    }
   }
 
   /*侧边栏头部背景*/
