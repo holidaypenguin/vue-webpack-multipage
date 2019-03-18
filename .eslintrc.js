@@ -29,6 +29,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    // from eslint-config-node
     // 缩进相关规则
     'indent': ['error', 2, { 'SwitchCase': 1 }], // 缩进控制 2空格
     'no-mixed-spaces-and-tabs': 'error', // 禁止使用 空格 和 tab 混合缩进
@@ -134,6 +135,7 @@ module.exports = {
     'no-useless-escape': 'error', // 禁用不必要的转义
     'handle-callback-err': 'error', // 强制回调错误处理
 
+    // customer
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
