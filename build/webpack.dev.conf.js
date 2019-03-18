@@ -6,20 +6,31 @@ const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-const { VueLoaderPlugin } = require('vue-loader');
-//引入多页面支持
+const {VueLoaderPlugin} = require('vue-loader')
+// 引入多页面支持
 const multipageHelper = require('./multipage-helper')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
+const match = () => {
+  const modules = multipageHelper.getModuleList().map(item => item.moduleID)
+    .join('|')
+
+  // from: /^\/pos\/module\/(index|about)/,
+  return new RegExp(`^/${config.produceName}/${config.moduleRootName}/(${modules})`)
+}
+
+// /^\/(pos)(.*)/
+const toRegExp = new RegExp(`^/(${config.produceName})(.*)`)
+
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true}),
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -31,16 +42,26 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       rewrites: [
         {
           from: match(),
-          to: function(content) {
+          to: (content) => {
             // match();
-            const from = content.match[0];
-            const to = from.replace(/^\/(pos)(.*)/, `/$1${config.produceNameSuffix}$2.html`)
-            console.log("From:", from)
-            console.log("  To:", to)
-            return path.posix.join(config.dev.assetsPublicPath, to);
-          }
+            const from = content.match[0]
+            const to = from.replace(toRegExp, `/$1${config.produceNameSuffix}$2.html`)
+            // eslint-disable-next-line no-console
+            console.log('From:', from)
+            // eslint-disable-next-line no-console
+            console.log('  To:', to)
+            const realTo = path.posix.join(config.dev.assetsPublicPath, to)
+
+            return realTo
+          },
         },
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, `${config.produceName}${config.produceNameSuffix}/${config.moduleRootName}/index.html`) },
+        {
+          from: /.*/,
+          to: path.posix.join(
+            config.dev.assetsPublicPath,
+            `${config.produceName}${config.produceNameSuffix}/${config.moduleRootName}/index.html`
+          ),
+        },
       ],
     },
     hot: true,
@@ -50,22 +71,22 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
+      ? {warnings: false, errors: true}
       : false,
     publicPath: config.dev.assetsPublicPath,
     proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
-    }
+    },
   },
   plugins: [
     // make sure to include the plugin for the magic
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       'process.env': Object.assign({}, require('../config/dev.env'), {
-        RUN_ENV: `"${process.env.RUN_ENV}"`
-      })
+        RUN_ENV: `"${process.env.RUN_ENV}"`,
+      }),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
@@ -81,21 +102,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../static'),
         to: config.dev.assetsSubDirectory,
-        ignore: ['.*']
-      }
-    ])
-  ]
+        ignore: ['.*'],
+      },
+    ]),
+  ],
 })
 
-function match(){
-  const modules = multipageHelper.getModuleList().map(item => item.moduleID).join('|');
-
-  // from: /^\/pos\/module\/(index|about)/,
-  return new RegExp("^\/pos\/module\/("+modules+")");
-}
-
-//添加Html模板集合
-Array.prototype.push.apply(devWebpackConfig.plugins,multipageHelper.getDevHtmlWebpackPluginList())
+// 添加Html模板集合
+Array.prototype.push.apply(devWebpackConfig.plugins, multipageHelper.getDevHtmlWebpackPluginList())
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
@@ -111,11 +125,12 @@ module.exports = new Promise((resolve, reject) => {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+          messages:
+            [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
         },
         onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
+          ? utils.createNotifierCallback()
+          : undefined,
       }))
 
       resolve(devWebpackConfig)
