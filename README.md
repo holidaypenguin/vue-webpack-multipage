@@ -71,8 +71,20 @@ location @rewrites {
 }
 ```
 
+## eslint-config-postcss
+
+暂未使用，postcss-bem写法警告还是存在 (Unknow at rule @component-namespace css.lint.unknownAtRules(unknownAtRules))，且会检验typescript格式。
+
+eslint-config-postcss 依赖 @logux/eslint-config eslint-plugin-jest eslint-plugin-security eslint-plugin-prefer-let 和 eslint-config-standard eslint-plugin-promise eslint-plugin-standard eslint-plugin-import  eslint-plugin-node，后一部分为当前项目使用的依赖
+
+https://github.com/postcss/eslint-config-postcss
+
+## eslint-config-vue
+暂未使用，未正确校验.vue文件。
+
+eslint-plugin-vue还要正常使用来校验
+
 ## 缺陷
-无esline
 无测试用例
 entry编译后为序号不是模块名字
 vendor没有注入

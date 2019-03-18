@@ -6,7 +6,7 @@ import setting from '../setting'
 
 Vue.use(Router)
 
-console.log(process.env.RUN_ENV);
+// console.log(process.env.RUN_ENV)
 
 export default new Router({
   mode: 'history',
@@ -15,22 +15,22 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: Main
+      component: Main,
     },
     {
       path: '/:page_path',
       name: 'main',
-      component: Main
+      component: Main,
     },
     {
       path: '/home',
       name: 'home',
-      component: Main
+      component: Main,
     },
     {
       path: '/login',
       name: 'login',
-      component: Main
-    }
-  ]
+      component: Main,
+    },
+  ],
 })

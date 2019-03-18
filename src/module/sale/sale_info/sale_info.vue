@@ -6,15 +6,14 @@
 
 <script>
 
-
 export default {
   name: 'app',
   //  页面加载之前
-  created() {
+  created () {
   },
   //  页面加载后
-  mounted() {
-  }
+  mounted () {
+  },
 }
 </script>
 
