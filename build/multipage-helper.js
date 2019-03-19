@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-console */
 /**
  * 多页面支持
  * @File:
@@ -13,11 +15,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const utils = require('./utils')
 const config = require('../config')
 
-function resolve (dir) {
+const resolve = (dir) => {
   return path.join(__dirname, '..', dir)
 }
 
-let DEBUG = true
+const DEBUG = true
 
 let moduleList // 缓存多页面模块列表
 const moduleRootPath = config.moduleRootPath // 模块根目录(这个可以根据自己的需求命名)
@@ -27,7 +29,7 @@ const moduleRootPath = config.moduleRootPath // 模块根目录(这个可以根�
  */
 exports.getEntries = function getEntries () {
   // 缓存js入口数组
-  var entries = {}
+  const entries = {}
   // 初始化模块列表
   this.getModuleList()
   // 变量模块列表
@@ -39,7 +41,9 @@ exports.getEntries = function getEntries () {
   DEBUG && console.log('\n*******************************************************************************')
   DEBUG && console.log('*********************************** entries ***********************************')
   DEBUG && console.log('*******************************************************************************')
-  DEBUG && console.log(Object.keys(entries).map(item => '【ENTRY】 ' + item).join('\n'))
+  DEBUG && console.log(Object.keys(entries).map(item => `【ENTRY】 ${item}`)
+    .join('\n'))
+
   return entries
 }
 
@@ -51,17 +55,17 @@ exports.getModuleList = function getModuleList () {
   // 判断是否为空，不为空则直接返回
   if (moduleList) {
     return moduleList
-  } else { // 为空则读取列表
-    moduleList = []
-    readDirSync(moduleRootPath, '')
-    moduleListFilter()
+  } // 为空则读取列表
+  moduleList = []
+  readDirSync(moduleRootPath, '')
+  moduleListFilter()
 
-    DEBUG && console.log('\n**********************************************************************************')
-    DEBUG && console.log('*********************************** moduleList ***********************************')
-    DEBUG && console.log('**********************************************************************************')
-    DEBUG && console.log(moduleList.map(item => '【MODULE】 ' + JSON.stringify(item)).join('\n'))
-    return moduleList
-  }
+  DEBUG && console.log('\n**********************************************************************************')
+  DEBUG && console.log('*********************************** moduleList ***********************************')
+  DEBUG && console.log('**********************************************************************************')
+  DEBUG && console.log(moduleList.map(item => `【MODULE】 ${JSON.stringify(item)}`).join('\n'))
+
+  return moduleList
 }
 
 /**
@@ -73,23 +77,24 @@ exports.getDevHtmlWebpackPluginList = function getDevHtmlWebpackPluginList () {
   DEBUG && console.log('*********************************** devHtmlWebpackPluginList ***********************************')
   DEBUG && console.log('************************************************************************************************')
   // 缓存dev的Html模板集合
-  var devHtmlWebpackPluginList = []
+  const devHtmlWebpackPluginList = []
   // 获取多页面模块集合
-  var moduleList = this.getModuleList()
+  const moduleList = this.getModuleList()
   // 遍历生成模块的HTML模板
   moduleList.forEach(function (mod) {
     // 生成配置
-    var conf = {
+    const conf = {
       filename: utils.assetsPath(`${config.moduleRootName}/${mod.moduleID}.html`),
       template: mod.moduleHTML,
       chunks: [mod.moduleID],
       inject: true,
-      hash: true
+      hash: true,
     }
     DEBUG && console.log('【CONF】', JSON.stringify(conf))
     // 添加HtmlWebpackPlugin对象
     devHtmlWebpackPluginList.push(new HtmlWebpackPlugin(conf))
   })
+
   return devHtmlWebpackPluginList
 }
 
@@ -102,31 +107,32 @@ exports.getProdHtmlWebpackPluginList = function getProdHtmlWebpackPluginList () 
   DEBUG && console.log('*********************************** prodHtmlWebpackPluginList ***********************************')
   DEBUG && console.log('*************************************************************************************************')
   // 缓存dev的Html模板集合
-  var prodHtmlWebpackPluginList = []
+  const prodHtmlWebpackPluginList = []
   // 获取多页面模块集合
-  var moduleList = this.getModuleList()
+  const moduleList = this.getModuleList()
   // 遍历生成模块的HTML模板
   moduleList.forEach(function (mod) {
     // 生成配置
-    var conf = {
+    const conf = {
       filename: utils.assetsPath(`${config.moduleRootName}/${mod.moduleID}.html`),
       template: mod.moduleHTML,
       inject: true,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeAttributeQuotes: true,
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
-      chunks: ['manifest', 'vendor', mod.moduleID]
+      chunks: ['manifest', 'vendor', mod.moduleID],
     }
     DEBUG && console.log('【CONF】', JSON.stringify(conf))
     // 添加HtmlWebpackPlugin对象
     prodHtmlWebpackPluginList.push(new HtmlWebpackPlugin(conf))
   })
+
   return prodHtmlWebpackPluginList
 }
 
@@ -135,34 +141,34 @@ exports.getProdHtmlWebpackPluginList = function getProdHtmlWebpackPluginList () 
  * @param path 需要变量的路径
  * @param moduleName 模块名称
  */
-function readDirSync (path, moduleName) {
+const readDirSync = (path, moduleName) => {
   // 缓存模块对象
-  var module = {
+  const module = {
     moduleID: '',
     moduleHTML: '',
-    moduleJS: ''
+    moduleJS: '',
   }
   // 获取当前模块ID
-  var moduleID = path.replace(moduleRootPath + '/', '')
+  let moduleID = path.replace(`${moduleRootPath}/`, '')
   if (path === moduleRootPath) {
     moduleID = ''
   }
   module.moduleID = moduleID
   // 获取目录下所有文件及文件夹
-  var pa = fs.readdirSync(path)
+  const pa = fs.readdirSync(path)
   pa.forEach(function (ele, index) {
-    var info = fs.statSync(path + '/' + ele)
+    const info = fs.statSync(`${path}/${ele}`)
     if (info.isDirectory()) {
       // console.log('dir: '+ele)
-      readDirSync(path + '/' + ele, ele)
+      readDirSync(`${path}/${ele}`, ele)
     } else {
       // 判断当前模块的html是否存在
-      if (moduleName + '.html' === ele) {
-        module.moduleHTML = path + '/' + ele
+      if (`${moduleName}.html` === ele) {
+        module.moduleHTML = `${path}/${ele}`
       }
       // 判断当前模块的js是否存在
-      if (moduleName + '.js' === ele) {
-        module.moduleJS = path + '/' + ele
+      if (`${moduleName}.js` === ele) {
+        module.moduleJS = `${path}/${ele}`
       }
       // console.log('file: '+ele)
     }
@@ -180,7 +186,7 @@ function readDirSync (path, moduleName) {
  * @author songshipeng
  * @date 2019-03-07
  */
-function moduleListFilter () {
+const moduleListFilter = () => {
   const currentModule = getCurrentModule()
 
   if (!moduleList ||
@@ -190,7 +196,7 @@ function moduleListFilter () {
     return moduleList
   }
 
-  let temp = moduleList.filter(
+  const temp = moduleList.filter(
     module => currentModule.indexOf(module.moduleID) >= 0
   )
 
@@ -199,7 +205,8 @@ function moduleListFilter () {
     : temp
 }
 
-function getCurrentModule () {
+const getCurrentModule = () => {
   DEBUG && console.log(process.argv)
+
   return process.argv.splice(2)
 }

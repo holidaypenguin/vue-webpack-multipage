@@ -1,17 +1,18 @@
+/* eslint-disable max-len */
 'use strict'
-const path = require('path')
+// const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')
 const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const { VueLoaderPlugin } = require('vue-loader');
-//引入多页面支持
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const {VueLoaderPlugin} = require('vue-loader')
+// 引入多页面支持
 const multipageHelper = require('./multipage-helper')
 
 const env = require('../config/prod.env')
@@ -22,14 +23,14 @@ const webpackConfig = merge(baseWebpackConfig, {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
       extract: true,
-      usePostCSS: true
-    })
+      usePostCSS: true,
+    }),
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
   },
   optimization: {
     minimize: true,
@@ -55,8 +56,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     //   }
     // },
     runtimeChunk: {
-      "name": "manifest"
-    }
+      'name': 'manifest',
+    },
   },
   plugins: [
     // make sure to include the plugin for the magic
@@ -64,8 +65,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': Object.assign({}, env, {
-        RUN_ENV: `"${process.env.RUN_ENV}"`
-      })
+        RUN_ENV: `"${process.env.RUN_ENV}"`,
+      }),
     }),
     // new UglifyJsPlugin({
     //   uglifyOptions: {
@@ -89,8 +90,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({
       cssProcessorOptions: config.build.productionSourceMap
-        ? { safe: true, map: { inline: false } }
-        : { safe: true }
+        ? {safe: true, map: {inline: false}}
+        : {safe: true},
     }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
@@ -134,7 +135,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     //     ignore: ['.*']
     //   }
     // ])
-  ]
+  ],
 })
 
 if (config.build.productionGzip) {
@@ -145,12 +146,12 @@ if (config.build.productionGzip) {
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: new RegExp(
-        '\\.(' +
-        config.build.productionGzipExtensions.join('|') +
-        ')$'
+        `\\.(${
+          config.build.productionGzipExtensions.join('|')
+        })$`
       ),
       threshold: 10240,
-      minRatio: 0.8
+      minRatio: 0.8,
     })
   )
 }
@@ -162,5 +163,5 @@ if (config.build.bundleAnalyzerReport) {
 
 module.exports = webpackConfig
 
-//添加Html模板集合
-Array.prototype.push.apply(module.exports.plugins,multipageHelper.getProdHtmlWebpackPluginList())
+// 添加Html模板集合
+Array.prototype.push.apply(module.exports.plugins, multipageHelper.getProdHtmlWebpackPluginList())

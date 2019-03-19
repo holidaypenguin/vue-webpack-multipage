@@ -46,7 +46,7 @@ module 文件夹下的文件夹路径作为模块的id，因此在指定发布�
 
 ``` bash
 # 路由配置页面无缓存
-location ~ ^/(pos)/ {
+location ~ ^/pos/module/ {
     root /xxx/dist;
     index  index.html index.htm;
     expires -1;
@@ -54,7 +54,16 @@ location ~ ^/(pos)/ {
     try_files $uri $uri/ @rewrites;
 }
 location @rewrites {
-      rewrite ^/(pos)\/module\/(index|about)/ /$1_static/module/$2.html break;
+    rewrite ^/(pos)\/module\/(index|about)/ /$1_static/module/$2.html break;
+}
+```
+rewrites也可以使用最原始的方式，但是我认为是最简洁的方式，因为需要支持module后面多个路径（定义为二级页面）。
+```
+location @rewrites {
+    rewrite ^/pos/module/index /pos_static/module/index.html break;
+    rewrite ^/pos/module/about /pos_static/module/about.html break;
+    # 二级页面配置
+    rewrite ^/pos/module/sale/sale_info /pos_static/module/sale/sale_info.html break;
 }
 ```
 
