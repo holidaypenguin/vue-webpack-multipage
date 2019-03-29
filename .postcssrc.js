@@ -2,6 +2,7 @@
 
 module.exports = {
   "plugins": {
+    "postcss-import": {},
     "postcss-bem-fix": {
       shortcuts: {
         'component-namespace': 'n',
@@ -15,7 +16,6 @@ module.exports = {
     "precss": {},
     "postcss-calc": {},
     "postcss-utilities": {},
-    "postcss-import": {},
     "postcss-url": {},
     "postcss-px2rem-more": {
       remUnit: 10,
