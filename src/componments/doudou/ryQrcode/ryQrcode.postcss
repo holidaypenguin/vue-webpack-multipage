@@ -1,0 +1,197 @@
+@n ry{
+
+  @b qrcode{
+    background-image: linear-gradient(-135deg, #F87373 0%, #F6504D 100%);
+    min-height: 100%;
+    padding: 30px;
+    position: relative;
+
+    @e wrap{
+      background: #F5F5F5;
+      box-shadow: 0 4px 30px 20px rgba(197,202,213,0.15);
+      border-radius: 8px;
+      min-height: 940px;
+      overflow: hidden;
+      position: relative;
+
+      &::before{
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #F5F5F5;
+        z-index: -1;
+      }
+
+      @m s03{
+        height: 314px;
+        min-height: auto;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      @m s0un {
+        > *{
+          opacity: 0.5;
+        }
+        .ry-qrcode-split{
+          border-top: 0.0625rem dashed rgba(151, 151, 151, 0.5);
+        }
+      }
+
+      @m s13{
+        height: 314px;
+        min-height: auto;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      @m s1un {
+        > *{
+          opacity: 0.3;
+        }
+        .ry-qrcode-split{
+          border-top: 0.0625rem dashed rgba(151, 151, 151, 0.3);
+        }
+      }
+    }
+    @e title{
+      font-family: PingFangSC-Regular;
+      font-size: 44px;
+      color: #111A34;
+      letter-spacing: 0;
+      line-height: 62px;
+      margin-top: 74px;
+      text-align: center;
+    }
+    @e time{
+      font-family: PingFangSC-Regular;
+      font-size: 28px;
+      color: #666F86;
+      text-align: justify;
+      line-height: 44px;
+      text-align: center;
+    }
+    @e detail{
+      font-family: Helvetica;
+      font-size: 28px;
+      color: #F6504D;
+      text-align: center;
+      line-height: 44px;
+      margin-top: 37px;
+
+      @m un{
+        color: #7E7E7E;
+      }
+    }
+    @e split{
+      margin: 51px 11px 0 11px;
+      border-top: 2px dashed #979797;
+      position: relative;
+      opacity: 1;
+
+      &::after, &::before{
+        content: ' ';
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        background: #F17677;
+        position: absolute;
+        top: -11px;
+        left: -21px;
+      }
+
+      &::after{
+        right: -21px;
+        left: auto;
+      }
+    }
+    @e code{
+      font-family: PingFangSC-Semibold;
+      font-size: 44px;
+      color: #111A34;
+      letter-spacing: 0;
+      line-height: 62px;
+      margin: 83px 50px 55px 50px;
+    }
+    @e qrcode{
+      width: 263px;
+      height: 263px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+    @e bar{
+      width: 471px;
+      height: 124px;
+      margin-top: 63px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 24px;
+      display: block;
+    }
+    @e tips{
+      font-family: PingFangSC-Regular;
+      font-size: 28px;
+      color: #C5CAD5;
+      text-align: center;
+      line-height: 44px;
+      margin-bottom: 42px;
+    }
+
+    @e codetitle{
+      font-family: PingFangSC-Semibold;
+      font-size: 44px;
+      color: #111A34;
+      letter-spacing: 0;
+      text-align: center;
+      line-height: 62px;
+      margin-top: 104px;
+    }
+    @e code2{
+      line-height: 67px;
+      margin: 24px 50px 50px 50px;
+      padding: 30px 44px;
+      font-family: PingFangSC-Semibold;
+      font-size: 48px;
+      color: #111A34;
+      letter-spacing: 0;
+      word-break: break-all;
+      background: rgba(133, 139, 156, 0.12);
+      border-radius: 64.5px;
+      text-align: center;
+    }
+
+    @e statu{
+      width: 209px;
+      height: 209px;
+      position: absolute;
+      top: 189px;
+      right: 30px;
+
+      @m s3{
+        height: 157px;
+        background: url(../../../module/doudou/images/icon-status2-3.png) no-repeat;
+        background-size: 100%;
+      }
+
+      @m s4{
+        background: url(../../../module/doudou/images/icon-status2-4.png) no-repeat;
+        background-size: 100%;
+      }
+
+      @m s5{
+        background: url(../../../module/doudou/images/icon-status2-5.png) no-repeat;
+        background-size: 100%;
+      }
+
+      @m s6{
+        background: url(../../../module/doudou/images/icon-status2-6.png) no-repeat;
+        background-size: 100%;
+      }
+    }
+  }
+}

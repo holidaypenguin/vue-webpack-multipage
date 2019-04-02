@@ -2,20 +2,25 @@
   "name": "vue-webpack-multipage",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "songshipeng <songshipeng@rongyi.com>",
+  "author": "songshipeng <songship1221@sina.com>",
   "private": true,
   "scripts": {
     "dev:build": "node build/build-dev.js",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
     "local": "cross-env RUN_ENV=local npm run dev:build",
-    "qa": "cross-env RUN_ENV=qa npm run build",
-    "preview": "cross-env RUN_ENV=preview npm run build",
-    "online": "cross-env RUN_ENV=online npm run build"
+    "qa:build": "cross-env RUN_ENV=qa npm run build && gulp --gulpfile ./build/gulp.js copy:qa:dist",
+    "qa": "cnpm i rimraf gulp && gulp --gulpfile ./build/gulp.js copy:qa:output",
+    "preview:build": "cross-env RUN_ENV=preview npm run build && gulp --gulpfile ./build/gulp.js copy:preview:dist",
+    "preview": "cnpm i rimraf gulp && gulp --gulpfile ./build/gulp.js copy:preview:output",
+    "online:build": "cross-env RUN_ENV=online npm run build && gulp --gulpfile ./build/gulp.js copy:online:dist",
+    "online": "cnpm i rimraf gulp && gulp --gulpfile ./build/gulp.js copy:online:output"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "vue": "^2.6.8",
-    "vue-router": "^3.0.2"
+    "vue-router": "^3.0.2",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -66,12 +71,17 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^3.0.1",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "gulp": "^4.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "masonry-layout": "^4.2.2",
     "node-notifier": "^5.1.2",
     "opn": "^5.4.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "ora": "^1.2.0",
     "portfinder": "^1.0.13",
+    "postcss": "^7.0.14",
     "postcss-bem-fix": "^2.0.0",
     "postcss-calc": "^7.0.1",
     "postcss-import": "^12.0.1",
@@ -94,7 +104,8 @@
     "webpack-bundle-analyzer": "^3.1.0",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "zepto": "^1.2.0"
   },
   "engines": {
     "node": ">= 6.0.0",

@@ -1,0 +1,66 @@
+@keybg:#e4e3e3;
+@keyBtn:#ea4817;
+@keyBtnActive:#ff3b00;
+@noClick:#c2c2c2;
+
+.keyboard {
+  user-select: none;
+  .menu{
+    width: 100%;
+    height: auto;
+    background: @keybg;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    // padding: 0 1.8182%;
+    box-sizing: border-box;
+    ul {
+      width: 100%;
+      height: auto;
+      -webkit-padding-start: 0;
+      justify-content: center;
+      display: flex;
+      margin: 20px 0;
+      li{
+        width: 8%;
+        height: auto;
+        background-color: white;
+        border-radius: 10px;
+        list-style: none;
+        text-align: center;
+        box-shadow: 1px 1px 2px #c3c3c3;
+        padding: 25px 0;
+        font-size: 42px;
+        display: flex;
+        justify-content: center;
+        margin: 0 0.8%;
+        &:active{
+          background-color: #c3c3c3;
+        }
+      }
+      li.key-datale,
+      li.key-close{
+        width: 17.6%;
+        background: @keyBtn;
+        color: #FFFFFF;
+
+      }
+      li.key-datale:active,
+      li.key-close:active{
+        background-color: @keyBtnActive;
+      }
+      li.key-letter{
+        width: 1%;
+        visibility: hidden;
+      }
+      li.no-click{
+        background-color:@noClick ;
+      }
+      li.key-visibility{
+        visibility: hidden;
+      }
+    }
+
+  }
+}

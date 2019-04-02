@@ -6,6 +6,8 @@ const path = require('path')
 const produceName = 'pos'
 const produceNameSuffix = '_static'
 
+const target = 'http://local.song.com'
+
 module.exports = {
   produceName,
   produceNameSuffix,
@@ -16,12 +18,17 @@ module.exports = {
     // Paths
     assetsSubDirectory: `${produceName}${produceNameSuffix}`,
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/pay-api': {
+        target,
+        changeOrigin: 'true',
+      },
+    },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '10.1.106.167', // can be overwritten by process.env.HOST
     // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    port: 8080,
+    port: 80,
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -50,6 +57,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../output'),
     assetsSubDirectory: `${produceName}${produceNameSuffix}`,
     assetsPublicPath: '/',
+    assetsStorage: path.resolve(__dirname, '../dist'),
 
     /**
      * Source Maps

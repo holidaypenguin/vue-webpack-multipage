@@ -1,0 +1,73 @@
+@import '../../../module/doudou/styles/var.css';
+
+@n ry{
+
+  @b list{
+    user-select: none;
+    min-height: calc(100% - 24px);
+    overflow: hidden;
+    margin: 2px 20px 22px 20px;
+    position: relative;
+    font-size: 0;
+  }
+
+  @b item {
+    @e wrap{
+      width: 50%;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    @e inner{
+      background: var(--color-write);
+      margin: 0 10px;
+      border-radius: 10px 10px 0px 0px;
+      color: var(--color-title);
+      font-size: 28px;
+      overflow: hidden;
+    }
+
+    @e empty{
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+    }
+
+    @e image{
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    @e title{
+      letter-spacing: -0.75px;
+      line-height: 38px;
+      margin: 20px 20px 10px 20px;
+    }
+
+    @e money{
+      margin: 44px 20px 30px 20px;
+      line-height: 40px;
+      word-break: break-all;
+
+      @e buy{
+        font-family: PingFangSC-Semibold;
+        font-size: 30px;
+        color: #E42F46;
+        letter-spacing: -0.51px;
+      }
+      @e old{
+        font-family: PingFangSC-Regular;
+        font-size: 22px;
+        color: #858B9C;
+        letter-spacing: 0;
+        line-height: 22px;
+        margin-left: 10px;
+        text-decoration: line-through;
+      }
+    }
+  }
+}

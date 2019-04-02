@@ -1,0 +1,248 @@
+@n ry{
+
+  @b buy{
+    margin-bottom: 120px;
+
+    @e top{
+      padding: 30px;
+      background: #FFFFFF;
+      display: flex;
+    }
+
+    @e image{
+      width: 205px;
+      height: 205px;
+    }
+
+    @e main{
+      flex: 1;
+      margin-left: 20px;
+      margin-right: 10px;
+      position: relative;
+    }
+
+    @e num{
+
+      @e wrap{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        /* border: 1px solid #F6504D; */
+        /* border-radius: 50px; */
+        /* overflow: hidden; */
+        line-height: 50px;
+        height: 52px;
+        color: #F6504D;
+        font-size: 32px;
+        display: flex;
+      }
+      @e mini{
+        text-align: center;
+        width: 52px;
+        border: 2px solid #F6504D;
+        border-right-width: 0;
+        @util border-left-radius(50px);
+      }
+      @e el{
+        text-align: center;
+        padding: 0 35px;
+        border: 2px solid #F6504D;
+        /* border-left: 1px solid #F6504D; */
+        /* border-right: 1px solid #F6504D; */
+      }
+      @e add{
+        text-align: center;
+        width: 52px;
+        border: 2px solid #F6504D;
+        border-left-width: 0;
+        @util border-right-radius(50px);
+      }
+    }
+
+    @e title{
+      font-family: PingFang-SC-Regular;
+      font-size: 40px;
+      color: #000000;
+      letter-spacing: 0;
+      height: 112px;
+      line-height: 56px;
+    }
+
+    @e money{
+      margin-top: 28px;
+      font-family: PingFang-SC-Semibold;
+      font-size: 32px;
+      color: #F6504D;
+      letter-spacing: 0;
+      line-height: 40px;
+    }
+
+    @e old{
+      margin-top: 3px;
+      font-family: PingFang-SC-Regular;
+      font-size: 22px;
+      color: #858B9C;
+      letter-spacing: 0;
+      line-height: 22px;
+      display: inline-block;
+    }
+
+    @e other{
+      background: #FFFFFF;
+      overflow: hidden;
+      margin-top: 30px;
+
+      @e title{
+        font-family: PingFangSC-Regular;
+        font-size: 28px;
+        color: #111A34;
+        letter-spacing: -0.68px;
+        line-height: 88px;
+        margin-left: 30px;
+      }
+
+      @e line{
+        margin: 0 30px;
+        border-top: 1px solid #DDDDDD;
+        padding: 20px 0 30px 0;
+        line-height: 44px;
+        font-family: PingFangSC-Regular;
+        font-size: 28px;
+        color: #858B9C;
+        letter-spacing: -0.68px;
+        display: flex;
+      }
+
+      @e left{
+        width: 150px;
+      }
+
+      @e right{
+        flex: 1;
+      }
+
+      @e shop{
+        color: #F6504D;
+        text-align: right;
+        padding-right: 30px;
+        background: url(../../../module/doudou/images/more.png) no-repeat;
+        background-size: 16px 17px;
+        background-position: right center;
+      }
+
+    }
+
+
+    @e bottom{
+      display: flex;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 101px;
+      line-height: 100px;
+      background: #FFFFFF;
+      border-top: 1px solid #DEE1E7;
+
+      @e left{
+        flex: 1 375px;
+        padding-left: 30px;
+        padding-right: 30px;
+        font-family: PingFangSC-Medium;
+        font-size: 32px;
+        color: #858B9C;
+
+        @m {
+          font-size: 48px;
+          color: #F6504D;
+        }
+      }
+      @e right{
+        flex: 1 375px;
+        border-radius: 0;
+      }
+    }
+
+    @e shop{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 100%;
+      background: rgba(0, 0, 0, 0);
+      transition: background cubic-bezier(.25,.46,.45,.94) 1s;
+      &::before{
+        content: ' ';
+      }
+
+      @m show{
+        top: 0%;
+        background: rgba(37,38,45,0.60);
+      }
+
+      @e wrap{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        max-height: 0;
+        background: #FFFFFF;
+        transition: max-height cubic-bezier(.25,.46,.45,.94) 0.5s;
+        @util border-top-radius(10px);
+
+        @m show{
+          max-height: 800px;
+        }
+      }
+
+      @e head{
+        background: #F5F5F5;
+        line-height: 120px;
+        font-family: PingFangSC-Regular;
+        font-size: 40px;
+        color: #111A34;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        @util border-top-radius(10px);
+      }
+      @e close{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 45px;
+        left: 32px;
+
+
+        background: url(../../../module/doudou/images/close.png) no-repeat;
+        background-size: 100% 100%;
+      }
+      @e list{
+        max-height: 680px;
+        overflow: auto;
+      }
+      @e item{
+        margin: 0 40px;
+        padding: 40px 0;
+        border-bottom: 1px solid #E2E4EA;
+        position: relative;
+        z-index: 2;
+      }
+      @e name{
+        font-family: PingFangSC-Regular;
+        font-size: 32px;
+        color: #111A34;
+        letter-spacing: -0.34px;
+        line-height: 32px;
+      }
+      @e addr{
+        margin-top: 16px;
+        font-family: PingFangSC-Light;
+        font-size: 24px;
+        color: #858B9C;
+        letter-spacing: -0.26px;
+        line-height: 24px;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+:root{
+
+  --color-main: #F6504D;
+  --color-main-light: linear-gradient(-135deg, #F87373 0%, #F6504D 100%);
+
+  --color-minor: #FF5B60;
+  --color-success: #1EBFB5;
+
+  --color-title: #111A35;
+  --color-title-1: #666F86;
+  --color-title-2: #C5CAD5;
+  --color-line: #DEE1E7;
+  --color-background: #F7F7F9;
+  --color-background-1: #FDECEC;
+  --color-write: #FFFFFF;
+
+  --color-modle: #25262D;
+  --color-disabled: #E2E4EA;
+  --color-font-1: #F04949;
+}

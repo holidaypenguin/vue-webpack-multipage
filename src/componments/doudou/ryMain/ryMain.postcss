@@ -1,0 +1,56 @@
+@import '../../../module/doudou/styles/var.css';
+@n ry{
+  @b main{
+    padding-bottom: 100px;
+
+    @e tabs{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      background: var(--color-write);
+      height: 100px;
+    }
+
+    @e tab{
+      flex: 1;
+      text-align: 50%;
+      font-family: PingFangSC-Regular;
+      font-size: 20px;
+      color: #666F83;
+      text-align: center;
+
+      @e icon{
+        width: 41px;
+        height: 41px;
+        margin: 15px auto 7px auto;
+
+        @m list{
+          background: url(../../../module/doudou/images/icon-list-un.png) no-repeat;
+          background-size: 100%;
+        }
+        @m my{
+          width: 45px;
+          height: 40px;
+          margin: 15px auto 8px auto;
+          background: url(../../../module/doudou/images/icon-my-un.png) no-repeat;
+          background-size: 100%;
+        }
+      }
+
+      @m active{
+        color: #F04949;
+
+        .ry-main-tab-icon--list{
+          background: url(../../../module/doudou/images/icon-list.png) no-repeat;
+          background-size: 100%;
+        }
+        .ry-main-tab-icon--my{
+          background: url(../../../module/doudou/images/icon-my.png) no-repeat;
+          background-size: 100%;
+        }
+      }
+    }
+  }
+}
