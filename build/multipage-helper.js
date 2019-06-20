@@ -126,7 +126,7 @@ exports.getProdHtmlWebpackPluginList = function getProdHtmlWebpackPluginList () 
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
-      chunks: ['manifest', 'vendor', mod.moduleID],
+      chunks: [`${mod.moduleID}-runtime`, 'chunk-libs', mod.moduleID],
     }
     DEBUG && console.log('【CONF】', JSON.stringify(conf))
     // 添加HtmlWebpackPlugin对象

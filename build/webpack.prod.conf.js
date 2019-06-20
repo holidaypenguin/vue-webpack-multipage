@@ -30,33 +30,24 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js'),
   },
   optimization: {
     minimize: true,
-    // TODO vendor暂时有问题
-    // splitChunks: {
-    //   chunks: 'all',
-    //   minSize: 1,
-    //   maxSize: 0,
-    //   minChunks: 1,
-    //   // maxAsyncRequests: 5,
-    //   // maxInitialRequests: 4,
-    //   // automaticNameDelimiter: '~',
-    //   // name: false,
-    //   name: () => {},
-    //   cacheGroups: {
-    //     vendors: {
-    //       test: /[\\/]node_modules[\\/]/,
-    //       // reuseExistingChunk: false,
-    //       priority: -10,
-    //       filename: utils.assetsPath('js/vendor.[chunkhash].js')
-    //       // filename: "vendor.[chunkhash].js"
-    //     }
-    //   }
-    // },
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        libs: {
+          name: 'chunk-libs',
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          chunks: 'initial', // 只打包初始时依赖的第三方
+          // filename: utils.assetsPath('js/vendor.[chunkhash].js'),
+        },
+      },
+    },
     runtimeChunk: {
-      'name': 'manifest',
+      name: entrypoint => `${entrypoint.name}-runtime`,
     },
   },
   plugins: [
