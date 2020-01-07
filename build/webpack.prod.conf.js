@@ -15,7 +15,8 @@ const {VueLoaderPlugin} = require('vue-loader')
 // 引入多页面支持
 const multipageHelper = require('./multipage-helper')
 
-const env = require('../config/prod.env')
+// const env = require('../config/prod.env')
+const env = require(`../config/prod.${process.env.RUN_ENV}.env`)
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -31,6 +32,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[name].[chunkhash].js'),
+    publicPath: (env.publicPath && env.publicPath.replace(/"/g, '')) || '',
   },
   optimization: {
     minimize: true,
