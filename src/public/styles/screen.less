@@ -1,0 +1,25 @@
+
+@defaultRemValue: 32px;
+
+@defaultWidth: 750px;
+
+.LoopScreenArray(@n, @i: 1, @argu) when (@i <= @n) {
+
+  @value: extract(@argu, @i);
+
+  @media only screen and (min-width: unit(@value, px)){
+    html, body{
+      font-size: unit(@value / @defaultWidth * @defaultRemValue, px) !important; /* no */
+    }
+  }
+
+  .LoopScreenArray(@n, @i+1, @argu);
+}
+
+// 屏幕适配
+.LoopScreen(@a, @b, @c, @d, @e, @f, @g, @h, @i, @j, @k, @l, @m, @n, @o, @p, @q, @r){
+  .LoopScreenArray(length(@arguments), 1, @arguments);
+}
+
+
+.LoopScreen(240px, 320px, 360px, 375px, 414px, 480px, 540px, 600px, 640px, 667px, 720px, 750px, 768px, 800px, 834px, 1024px, 1080px, 1440px);

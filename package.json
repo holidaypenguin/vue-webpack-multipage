@@ -2,7 +2,7 @@
   "name": "vue-webpack-multipage",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "songshipeng <songshipeng@rongyi.com>",
+  "author": "songshipeng <songshi1221@sina.com>",
   "private": true,
   "scripts": {
     "dev:build": "node build/build-dev.js",
@@ -89,6 +89,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "url-loader": "^1.1.2",
+    "vconsole": "^3.3.4",
     "vue-eslint-parser": "^6.0.3",
     "vue-loader": "^15.7.0",
     "vue-style-loader": "^4.1.2",
