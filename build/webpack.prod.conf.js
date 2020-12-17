@@ -46,6 +46,12 @@ const webpackConfig = merge(baseWebpackConfig, {
           chunks: 'initial', // 只打包初始时依赖的第三方
           // filename: utils.assetsPath('js/vendor.[chunkhash].js'),
         },
+        default: {
+          name: 'common-libs',
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
       },
     },
     runtimeChunk: {
